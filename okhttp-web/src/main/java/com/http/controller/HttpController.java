@@ -1,5 +1,6 @@
 package com.http.controller;
 
+import com.http.ResutlResponse;
 import com.http.User;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,17 +17,21 @@ public class HttpController {
         return validata(username,password);
     }
     @RequestMapping(value="/getLogin",method = RequestMethod.GET)
-    public boolean getLogin(@RequestParam String username,@RequestParam String password){
+    public ResutlResponse getLogin(@RequestParam String username, @RequestParam String password){
         System.out.println("get请求:"+username+","+password);
-
-        return validata(username,password);
+        ResutlResponse resutlResponse = new ResutlResponse();
+        resutlResponse.setResult(validata(username,password));
+        resutlResponse.setMessage("get请求");
+        return resutlResponse;
     }
 
     @RequestMapping(value="/postLogin",method = RequestMethod.POST)
-    public boolean postLogin(@RequestParam String username, @RequestParam String password){
+    public ResutlResponse postLogin(@RequestParam String username, @RequestParam String password){
         System.out.println("POST请求:"+username+","+password);
-
-        return validata(username,password);
+        ResutlResponse resutlResponse = new ResutlResponse();
+        resutlResponse.setResult(validata(username,password));
+        resutlResponse.setMessage("POST请求");
+        return resutlResponse;
     }
 
     private boolean validata(String username,String password){
